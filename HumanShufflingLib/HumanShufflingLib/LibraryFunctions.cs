@@ -33,15 +33,7 @@ namespace Kesyhara.HumanShuffling.LibraryFunctions
     {
         public static ICollection<T> MongeanShuffle<T>(this ICollection<T> collectionToShuffle, int iterationCount = 1)
         {
-            /*
-            ICollection<T> listToShuffle = collectionToShuffle;
-
-            if (iterationCount > 1)
-                listToShuffle = listToShuffle.MongeanShuffle(iterationCount - 1);
-            /*/
-
             ICollection<T> listToShuffle = HandleMultipleIterations<T>(HumanShuffling_LibraryFunctions.MongeanShuffle<T>, collectionToShuffle, iterationCount);
-            //*/
 
 
             LinkedList<T> returnList;
