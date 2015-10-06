@@ -35,19 +35,13 @@ namespace Kesyhara.HumanShuffling.LibraryFunctions
         {
             ICollection<T> listToShuffle = HandleMultipleIterations<T>(HumanShuffling_LibraryFunctions.MongeanShuffle<T>, collectionToShuffle, iterationCount);
 
-
             LinkedList<T> returnList;
             Queue<T> dealingList;
 
             SetupMongeanShuffle(out returnList, out dealingList, listToShuffle);
 
             while (!dealingList.IsEmpty())
-            {
-                if (!returnList.CountIsEven())
-                    returnList.AddFirst(dealingList.Dequeue());
-                else
-                    returnList.AddLast(dealingList.Dequeue());
-            }
+                HandleMongeanStep(returnList, dealingList);
 
             return returnList;
         }
@@ -57,6 +51,14 @@ namespace Kesyhara.HumanShuffling.LibraryFunctions
             theReturnList = new LinkedList<T>();
             queueToDealFrom = new Queue<T>(listToDealFrom);
             theReturnList.AddFirst(queueToDealFrom.Dequeue());
+        }
+
+        private static void HandleMongeanStep<T>(LinkedList<T> targetList, Queue<T> dealingList)
+        {
+            if (!targetList.CountIsEven())
+                targetList.AddFirst(dealingList.Dequeue());
+            else
+                targetList.AddLast(dealingList.Dequeue());
         }
 
         private static ICollection<T> HandleMultipleIterations<T>(Func<ICollection<T>, int, ICollection<T>> shuffleToApply, ICollection<T> collectionToShuffle, int iterationsRemaining)
