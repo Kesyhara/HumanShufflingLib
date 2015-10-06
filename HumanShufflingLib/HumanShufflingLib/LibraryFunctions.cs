@@ -27,10 +27,13 @@ using System.Threading.Tasks;
 
 using Kesyhara.HumanShuffling.Utils;
 
+using MyUtils = Kesyhara.HumanShuffling.Utils.Utils;
+
 namespace Kesyhara.HumanShuffling.LibraryFunctions
 {
     public static class HumanShuffling_LibraryFunctions
     {
+        //Mongean Shuffle Methods
         public static ICollection<T> MongeanShuffle<T>(this ICollection<T> collectionToShuffle, int iterationCount = 1)
         {
             ICollection<T> listToShuffle = HandleMultipleIterations<T>(HumanShuffling_LibraryFunctions.MongeanShuffle<T>, collectionToShuffle, iterationCount);
@@ -60,6 +63,58 @@ namespace Kesyhara.HumanShuffling.LibraryFunctions
             else
                 targetList.AddLast(dealingList.Dequeue());
         }
+        //Mongean Shuffle Methods End
+
+
+        //Riffle Shuffle Methods Start
+        public static ICollection<T> RiffleShuffle<T>(this ICollection<T> collectionToShuffle, int iterationCount = 1)
+        {
+            ICollection<T> firstList, secondList, targetList;
+            targetList = new List<T>(collectionToShuffle.Count);
+
+            MyUtils.SplitCollectionInHalf<T>(collectionToShuffle, out firstList, out secondList);
+
+            Stack<T> topHalf = new Stack<T>(firstList);
+            Stack<T> botHalf = new Stack<T>(secondList);
+
+            while (!topHalf.IsEmpty() && !botHalf.IsEmpty())
+                HandleRiffleStep(topHalf, botHalf, targetList);
+
+            HandleRiffleFinalize(topHalf, botHalf, targetList);
+
+            return targetList;
+        }
+
+        private static void HandleRiffleStep<T>(Stack<T> topHalf, Stack<T> botHalf, ICollection<T> targetList)
+        {
+            Random rng = new Random();
+
+            if (MyUtils.IntegerIsEven(rng.Next()))
+                targetList.Add(topHalf.Pop());
+            else
+                targetList.Add(botHalf.Pop());
+        }
+
+        private static void HandleRiffleFinalize<T>(Stack<T> topHalf, Stack<T> botHalf, ICollection<T> targetList)
+        {
+            Stack<T> stackToEmpty = DetermineEmptyStack(topHalf, botHalf);
+
+            while (!stackToEmpty.IsEmpty())
+                targetList.Add(stackToEmpty.Pop());
+        }
+
+        private static Stack<T> DetermineEmptyStack<T>(Stack<T> firstStack, Stack<T> secondStack)
+        {
+            Stack<T> returnValue;
+
+            if (firstStack.IsEmpty())
+                returnValue = secondStack;
+            else
+                returnValue = firstStack;
+
+            return returnValue;
+        }
+        //RiffleShuffleMethods End
 
         private static ICollection<T> HandleMultipleIterations<T>(Func<ICollection<T>, int, ICollection<T>> shuffleToApply, ICollection<T> collectionToShuffle, int iterationsRemaining)
         {
