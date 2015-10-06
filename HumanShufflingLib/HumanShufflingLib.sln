@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanShufflingLib", "HumanShufflingLib\HumanShufflingLib.csproj", "{2D10A978-0DE0-428C-BB7A-DB73EF7BA0D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{431A0267-13CE-4C3C-9073-30441D7703B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanShufflingLib_UnitTests", "HumanShufflingLib_UnitTests\HumanShufflingLib_UnitTests.csproj", "{7A29C623-E46A-42C4-A09B-6D4EB45B0945}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{2D10A978-0DE0-428C-BB7A-DB73EF7BA0D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D10A978-0DE0-428C-BB7A-DB73EF7BA0D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D10A978-0DE0-428C-BB7A-DB73EF7BA0D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{431A0267-13CE-4C3C-9073-30441D7703B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{431A0267-13CE-4C3C-9073-30441D7703B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{431A0267-13CE-4C3C-9073-30441D7703B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{431A0267-13CE-4C3C-9073-30441D7703B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A29C623-E46A-42C4-A09B-6D4EB45B0945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A29C623-E46A-42C4-A09B-6D4EB45B0945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A29C623-E46A-42C4-A09B-6D4EB45B0945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A29C623-E46A-42C4-A09B-6D4EB45B0945}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
