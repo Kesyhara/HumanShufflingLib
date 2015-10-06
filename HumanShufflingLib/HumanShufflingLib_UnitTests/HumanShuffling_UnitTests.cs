@@ -81,11 +81,22 @@ namespace Kesyhara.HumanShuffling.UnitTests
 
         [TestCategory("Mongean")]
         [TestMethod]
-        public void MongeanShuffleGeneratesCorrectSequence()
+        public void MongeanShuffleGeneratesCorrectSequenceOnOneIteration()
         {
             ICollection<int> shuffledList = GenerateMockListOfIntegers(5).MongeanShuffle<int>();
 
             List<int> correctListOrder = new List<int> { 4, 2, 1, 3, 5 };
+
+            Assert.IsTrue(shuffledList.SequenceEqual(correctListOrder));
+        }
+
+        [TestCategory("Mongean")]
+        [TestMethod]
+        public void MongeanShuffleGeneratesCorrectSequenceOnTwoIterations()
+        {
+            ICollection<int> shuffledList = GenerateMockListOfIntegers(5).MongeanShuffle<int>(2);
+
+            List<int> correctListOrder = new List<int> { 3, 2, 4, 1, 5 };
 
             Assert.IsTrue(shuffledList.SequenceEqual(correctListOrder));
         }
