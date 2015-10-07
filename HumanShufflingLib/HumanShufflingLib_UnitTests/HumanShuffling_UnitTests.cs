@@ -128,6 +128,33 @@ namespace Kesyhara.HumanShuffling.UnitTests
             Assert.IsTrue(!testList.SequenceEqual(GenerateMockListOfIntegers(5)));
         }
 
+        [TestCategory("Overhand")]
+        [TestMethod]
+        public void OverhandShuffleDoesNotReturnNull()
+        {
+            ICollection<int> testList = GenerateMockListOfIntegers(5).OverhandShuffle<int>();
+
+            Assert.IsNotNull(testList);
+        }
+
+        [TestCategory("Overhand")]
+        [TestMethod]
+        public void OverhandShuffleMaintainsCount()
+        {
+            ICollection<int> testList = GenerateMockListOfIntegers(5).OverhandShuffle<int>();
+
+            Assert.AreEqual(testList.Count, GenerateMockListOfIntegers(5).Count);
+        }
+
+        [TestCategory("Overhand")]
+        [TestMethod]
+        public void OverhandShuffleReordersSequence()
+        {
+            ICollection<int> testList = GenerateMockListOfIntegers(5).OverhandShuffle<int>();
+
+            Assert.IsTrue(!testList.SequenceEqual(GenerateMockListOfIntegers(5)));
+        }
+
         public ICollection<int> GenerateMockListOfIntegers(int listLength)
         {
             List<int> returnList = new List<int>();

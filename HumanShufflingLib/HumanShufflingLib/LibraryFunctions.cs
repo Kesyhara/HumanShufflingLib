@@ -69,10 +69,12 @@ namespace Kesyhara.HumanShuffling.LibraryFunctions
         //Riffle Shuffle Methods Start
         public static ICollection<T> RiffleShuffle<T>(this ICollection<T> collectionToShuffle, int iterationCount = 1)
         {
-            ICollection<T> firstList, secondList, targetList;
-            targetList = new List<T>(collectionToShuffle.Count);
+            ICollection<T> firstList, secondList, targetList, listToShuffle;
+            listToShuffle = HandleMultipleIterations<T>(HumanShuffling_LibraryFunctions.RiffleShuffle, collectionToShuffle, iterationCount);
 
-            MyUtils.SplitCollectionInHalf<T>(collectionToShuffle, out firstList, out secondList);
+            targetList = new List<T>(listToShuffle.Count);
+
+            MyUtils.SplitCollectionInHalf<T>(listToShuffle, out firstList, out secondList);
 
             Stack<T> topHalf = new Stack<T>(firstList);
             Stack<T> botHalf = new Stack<T>(secondList);
@@ -114,7 +116,16 @@ namespace Kesyhara.HumanShuffling.LibraryFunctions
 
             return returnValue;
         }
-        //RiffleShuffleMethods End
+        //Riffle Shuffle Methods End
+
+        //Overhand Shuffle Methods Start
+
+        public static ICollection<T> OverhandShuffle<T>(this ICollection<T> collectionToShuffle, int iterationCount = 1)
+        {
+            return new List<T>(collectionToShuffle);
+        }
+        
+        //Overhand Shuffle Methods End
 
         private static ICollection<T> HandleMultipleIterations<T>(Func<ICollection<T>, int, ICollection<T>> shuffleToApply, ICollection<T> collectionToShuffle, int iterationsRemaining)
         {
