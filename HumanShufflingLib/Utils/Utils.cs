@@ -58,6 +58,26 @@ namespace Kesyhara.HumanShuffling.Utils
             return arg % 2 == 0;
         }
 
+        public static double CalculateGaussianVariable(double mu = 0.0, double sigma = 1.0)
+        {
+            Random ranGen = new Random();
+            double u1 = ranGen.NextDouble(), u2 = ranGen.NextDouble();
+
+            double z = Math.Sqrt(-2 * Math.Log(u1) * Math.Cos(2 * Math.PI * u2));
+
+            return (z * sigma) + mu;
+        }
+
+        public static ICollection<int> GenerateListOfIntegers(int listLength)
+        {
+            List<int> returnList = new List<int>();
+
+            for (int i = 1; i <= listLength; i++)
+                returnList.Add(i);
+
+            return returnList;
+        }
+
         public static void SplitCollectionInHalf<T>(ICollection<T> collectionToSplit,
             out ICollection<T> firstHalf, out ICollection<T> secondHalf)
         {

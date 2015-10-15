@@ -33,7 +33,7 @@ namespace Kesyhara.HumanShuffling.LibraryFunctions
 {
     public static class HumanShuffling_LibraryFunctions
     {
-        //Mongean Shuffle Methods
+        #region Mongean
         public static ICollection<T> MongeanShuffle<T>(this ICollection<T> collectionToShuffle, int iterationCount = 1)
         {
             ICollection<T> listToShuffle = HandleMultipleIterations<T>(HumanShuffling_LibraryFunctions.MongeanShuffle<T>, collectionToShuffle, iterationCount);
@@ -63,10 +63,10 @@ namespace Kesyhara.HumanShuffling.LibraryFunctions
             else
                 targetList.AddLast(dealingList.Dequeue());
         }
-        //Mongean Shuffle Methods End
+        #endregion
 
 
-        //Riffle Shuffle Methods Start
+        #region Riffle
         public static ICollection<T> RiffleShuffle<T>(this ICollection<T> collectionToShuffle, int iterationCount = 1)
         {
             ICollection<T> firstList, secondList, targetList, listToShuffle;
@@ -116,16 +116,18 @@ namespace Kesyhara.HumanShuffling.LibraryFunctions
 
             return returnValue;
         }
-        //Riffle Shuffle Methods End
+        #endregion
 
-        //Overhand Shuffle Methods Start
-
+        #region Overhand
         public static ICollection<T> OverhandShuffle<T>(this ICollection<T> collectionToShuffle, int iterationCount = 1)
         {
+            double halfDeckSize = collectionToShuffle.Count / 2;
+
+
+
             return new List<T>(collectionToShuffle);
         }
-        
-        //Overhand Shuffle Methods End
+        #endregion
 
         private static ICollection<T> HandleMultipleIterations<T>(Func<ICollection<T>, int, ICollection<T>> shuffleToApply, ICollection<T> collectionToShuffle, int iterationsRemaining)
         {

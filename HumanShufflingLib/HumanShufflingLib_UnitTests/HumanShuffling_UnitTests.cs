@@ -25,18 +25,23 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Kesyhara.HumanShuffling.LibraryFunctions;
+using Kesyhara.HumanShuffling.Utils;
+
+using MyUtils = Kesyhara.HumanShuffling.Utils.Utils;
 
 namespace Kesyhara.HumanShuffling.UnitTests
 {
     [TestClass]
     public class HumanShufflingTests
     {
+        #region Mock List
         [TestCategory("Mock List")]
         [TestMethod]
         public void GenerateMockListDoesNotReturnNull()
         {
-            ICollection<int> testList = GenerateMockListOfIntegers(5);
+            ICollection<int> testList = MyUtils.GenerateListOfIntegers(5);
 
             Assert.IsNotNull(testList);
         }
@@ -45,18 +50,20 @@ namespace Kesyhara.HumanShuffling.UnitTests
         [TestMethod]
         public void GenerateMockListReturnsCorrectListOfIntegers()
         {
-            ICollection<int> testList = GenerateMockListOfIntegers(5);
+            ICollection<int> testList = MyUtils.GenerateListOfIntegers(5);
 
             List<int> correctList = new List<int> { 1, 2, 3, 4, 5 };
 
             Assert.IsTrue(correctList.SequenceEqual(testList));
         }
+        #endregion
 
+        #region Mongean
         [TestCategory("Mongean")]
         [TestMethod]
         public void MongeanShuffleDoesNotReturnNull()
         {
-            ICollection<int> shuffledList = GenerateMockListOfIntegers(5).MongeanShuffle<int>();
+            ICollection<int> shuffledList = MyUtils.GenerateListOfIntegers(5).MongeanShuffle<int>();
 
             Assert.IsNotNull(shuffledList);
         }
@@ -65,25 +72,25 @@ namespace Kesyhara.HumanShuffling.UnitTests
         [TestMethod]
         public void MongeanShuffleMaintainsCount()
         {
-            ICollection<int> shuffledList = GenerateMockListOfIntegers(5).MongeanShuffle<int>();
+            ICollection<int> shuffledList = MyUtils.GenerateListOfIntegers(5).MongeanShuffle<int>();
 
-            Assert.AreEqual(shuffledList.Count, GenerateMockListOfIntegers(5).Count);
+            Assert.AreEqual(shuffledList.Count, MyUtils.GenerateListOfIntegers(5).Count);
         }
 
         [TestCategory("Mongean")]
         [TestMethod]
         public void MongeanShuffleReordersSequence()
         {
-            ICollection<int> shuffledList = GenerateMockListOfIntegers(5).MongeanShuffle<int>();
+            ICollection<int> shuffledList = MyUtils.GenerateListOfIntegers(5).MongeanShuffle<int>();
 
-            Assert.IsTrue(!shuffledList.SequenceEqual(GenerateMockListOfIntegers(5)));
+            Assert.IsTrue(!shuffledList.SequenceEqual(MyUtils.GenerateListOfIntegers(5)));
         }
 
         [TestCategory("Mongean")]
         [TestMethod]
         public void MongeanShuffleGeneratesCorrectSequenceOnOneIteration()
         {
-            ICollection<int> shuffledList = GenerateMockListOfIntegers(5).MongeanShuffle<int>();
+            ICollection<int> shuffledList = MyUtils.GenerateListOfIntegers(5).MongeanShuffle<int>();
 
             List<int> correctListOrder = new List<int> { 4, 2, 1, 3, 5 };
 
@@ -94,18 +101,20 @@ namespace Kesyhara.HumanShuffling.UnitTests
         [TestMethod]
         public void MongeanShuffleGeneratesCorrectSequenceOnTwoIterations()
         {
-            ICollection<int> shuffledList = GenerateMockListOfIntegers(5).MongeanShuffle<int>(2);
+            ICollection<int> shuffledList = MyUtils.GenerateListOfIntegers(5).MongeanShuffle<int>(2);
 
             List<int> correctListOrder = new List<int> { 3, 2, 4, 1, 5 };
 
             Assert.IsTrue(shuffledList.SequenceEqual(correctListOrder));
         }
+        #endregion
 
+        #region Riffle
         [TestCategory("Riffle")]
         [TestMethod]
         public void RiffleShuffleDoesNotReturnNull()
         {
-            ICollection<int> testList = GenerateMockListOfIntegers(5).RiffleShuffle<int>();
+            ICollection<int> testList = MyUtils.GenerateListOfIntegers(5).RiffleShuffle<int>();
 
             Assert.IsNotNull(testList);
         }
@@ -114,25 +123,27 @@ namespace Kesyhara.HumanShuffling.UnitTests
         [TestMethod]
         public void RiffleShuffleMaintainsCount()
         {
-            ICollection<int> testList = GenerateMockListOfIntegers(5).RiffleShuffle<int>();
+            ICollection<int> testList = MyUtils.GenerateListOfIntegers(5).RiffleShuffle<int>();
 
-            Assert.AreEqual(testList.Count, GenerateMockListOfIntegers(5).Count);
+            Assert.AreEqual(testList.Count, MyUtils.GenerateListOfIntegers(5).Count);
         }
 
         [TestCategory("Riffle")]
         [TestMethod]
         public void RiffleShuffleReordersSequence()
         {
-            ICollection<int> testList = GenerateMockListOfIntegers(5).RiffleShuffle<int>();
+            ICollection<int> testList = MyUtils.GenerateListOfIntegers(5).RiffleShuffle<int>();
 
-            Assert.IsTrue(!testList.SequenceEqual(GenerateMockListOfIntegers(5)));
+            Assert.IsTrue(!testList.SequenceEqual(MyUtils.GenerateListOfIntegers(5)));
         }
+        #endregion
 
+        #region Overhand
         [TestCategory("Overhand")]
         [TestMethod]
         public void OverhandShuffleDoesNotReturnNull()
         {
-            ICollection<int> testList = GenerateMockListOfIntegers(5).OverhandShuffle<int>();
+            ICollection<int> testList = MyUtils.GenerateListOfIntegers(5).OverhandShuffle<int>();
 
             Assert.IsNotNull(testList);
         }
@@ -141,28 +152,19 @@ namespace Kesyhara.HumanShuffling.UnitTests
         [TestMethod]
         public void OverhandShuffleMaintainsCount()
         {
-            ICollection<int> testList = GenerateMockListOfIntegers(5).OverhandShuffle<int>();
+            ICollection<int> testList = MyUtils.GenerateListOfIntegers(5).OverhandShuffle<int>();
 
-            Assert.AreEqual(testList.Count, GenerateMockListOfIntegers(5).Count);
+            Assert.AreEqual(testList.Count, MyUtils.GenerateListOfIntegers(5).Count);
         }
 
         [TestCategory("Overhand")]
         [TestMethod]
         public void OverhandShuffleReordersSequence()
         {
-            ICollection<int> testList = GenerateMockListOfIntegers(5).OverhandShuffle<int>();
+            ICollection<int> testList = MyUtils.GenerateListOfIntegers(5).OverhandShuffle<int>();
 
-            Assert.IsTrue(!testList.SequenceEqual(GenerateMockListOfIntegers(5)));
+            Assert.IsTrue(!testList.SequenceEqual(MyUtils.GenerateListOfIntegers(5)));
         }
-
-        public ICollection<int> GenerateMockListOfIntegers(int listLength)
-        {
-            List<int> returnList = new List<int>();
-
-            for (int i = 1; i <= listLength; i++)
-                returnList.Add(i);
-
-            return returnList;
-        }
+        #endregion
     }
 }
