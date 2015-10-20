@@ -24,7 +24,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Kesyhara.HumanShuffling.Utils
+namespace Kesyhara.HumanShuffling.UtilityFunctions
 {
     public static class Utils
     {
@@ -58,12 +58,11 @@ namespace Kesyhara.HumanShuffling.Utils
             return arg % 2 == 0;
         }
 
-        public static double CalculateGaussianVariable(double mu = 0.0, double sigma = 1.0)
+        public static double NextGaussian(this Random ranGen, double mu = 0.0, double sigma = 1.0)
         {
-            Random ranGen = new Random();
-            double u1 = ranGen.NextDouble(), u2 = ranGen.NextDouble();
+            double u1 = ranGen.NextDouble(), u2 = ranGen.NextDouble(), z;
 
-            double z = Math.Sqrt(-2 * Math.Log(u1) * Math.Cos(2 * Math.PI * u2));
+            z = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Cos(2.0 * Math.PI * u2);
 
             return (z * sigma) + mu;
         }

@@ -25,9 +25,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Kesyhara.HumanShuffling.Utils;
+using Kesyhara.HumanShuffling.UtilityFunctions;
 
-using MyUtils = Kesyhara.HumanShuffling.Utils.Utils;
+using MyUtils = Kesyhara.HumanShuffling.UtilityFunctions.Utils;
 
 namespace Kesyhara.HumanShuffling.LibraryFunctions
 {
