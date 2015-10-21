@@ -142,7 +142,7 @@ namespace Kesyhara.HumanShuffling.UnitTests
         [TestMethod]
         public void OverhandShuffleDoesNotReturnNull()
         {
-            ICollection<int> testList = MyUtils.GenerateListOfIntegers(5).ApplyOverhandShuffle<int>();
+            ICollection<int> testList = MyUtils.GenerateListOfIntegers(52).ApplyOverhandShuffle<int>();
 
             Assert.IsNotNull(testList);
         }
@@ -151,18 +151,18 @@ namespace Kesyhara.HumanShuffling.UnitTests
         [TestMethod]
         public void OverhandShuffleMaintainsCount()
         {
-            ICollection<int> testList = MyUtils.GenerateListOfIntegers(5).ApplyOverhandShuffle<int>();
+            ICollection<int> testList = MyUtils.GenerateListOfIntegers(52).ApplyOverhandShuffle<int>();
 
-            Assert.AreEqual(testList.Count, MyUtils.GenerateListOfIntegers(5).Count);
+            Assert.AreEqual(testList.Count, MyUtils.GenerateListOfIntegers(52).Count);
         }
 
         [TestCategory("Overhand")]
         [TestMethod]
         public void OverhandShuffleReordersSequence()
         {
-            ICollection<int> testList = MyUtils.GenerateListOfIntegers(5).ApplyOverhandShuffle<int>();
+            ICollection<int> testList = MyUtils.GenerateListOfIntegers(52).ApplyOverhandShuffle<int>();
 
-            Assert.IsTrue(!testList.SequenceEqual(MyUtils.GenerateListOfIntegers(5)));
+            Assert.IsTrue(!testList.SequenceEqual(MyUtils.GenerateListOfIntegers(52)));
         }
         #endregion
     }

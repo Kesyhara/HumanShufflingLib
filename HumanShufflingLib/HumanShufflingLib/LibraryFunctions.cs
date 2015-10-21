@@ -126,12 +126,31 @@ namespace Kesyhara.HumanShuffling.LibraryFunctions
             for (int iterationsLeft = iterationCount; iterationsLeft > 0; iterationsLeft--)
                 shuffledCollection = OverhandShuffle(shuffledCollection);
 
-            return new List<T>(collectionToShuffle);
+            return shuffledCollection;
         }
 
         private static ICollection<T> OverhandShuffle<T> (ICollection<T> collectionToShuffle)
         {
-            return new List<T>(collectionToShuffle);
+            ICollection<T> listToReadFrom = new List<T>(collectionToShuffle), listToReturn = new List<T>(collectionToShuffle.Count);
+            Random ranGen = new Random();
+            
+            while (!listToReadFrom.IsEmpty())
+                OverhandStep<T>(ref listToReadFrom, ref listToReturn, CalculateGaussianSliceSize(collectionToShuffle.Count, ranGen));
+
+            return listToReturn;
+        }
+
+        private static void OverhandStep<T>(ref ICollection<T> sourceList, ref ICollection<T> targetList, int sliceSize)
+        {
+            targetList = new List<T>(sourceList.Take(sliceSize).Concat(targetList));
+            sourceList = new List<T>(sourceList.Skip(sliceSize));
+        }
+
+        private static int CalculateGaussianSliceSize(int originalListSize, Random ranGen)
+        {
+            double gaussianVariable = ranGen.NextGaussian(0.5, 0.2);
+            int gaussianSliceSize = (int) (originalListSize * Math.Abs(gaussianVariable) / 2);
+            return gaussianSliceSize;
         }
         #endregion
 
