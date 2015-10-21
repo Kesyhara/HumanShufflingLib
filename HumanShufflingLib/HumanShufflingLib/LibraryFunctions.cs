@@ -34,34 +34,42 @@ namespace Kesyhara.HumanShuffling.LibraryFunctions
     public static class HumanShuffling_LibraryFunctions
     {
         #region Mongean
-        public static ICollection<T> MongeanShuffle<T>(this ICollection<T> collectionToShuffle, int iterationCount = 1)
+        public static ICollection<T> ApplyMongeanShuffle<T>(this ICollection<T> collectionToShuffle, int iterationCount = 1)
         {
-            ICollection<T> listToShuffle = HandleMultipleIterations<T>(HumanShuffling_LibraryFunctions.MongeanShuffle<T>, collectionToShuffle, iterationCount);
+            ICollection<T> shuffledCollection = new List<T>(collectionToShuffle);
 
+            for (int iterationsLeft = iterationCount; iterationsLeft > 0; iterationsLeft--)
+                shuffledCollection = MongeanShuffle(shuffledCollection);
+
+            return shuffledCollection;
+        }
+
+        public static ICollection<T> MongeanShuffle<T>(ICollection<T> collectionToShuffle)
+        {
             LinkedList<T> returnList;
-            Queue<T> dealingList;
+            Queue<T> dealingQueue;
 
-            SetupMongeanShuffle(out returnList, out dealingList, listToShuffle);
+            SetupMongeanShuffle(out returnList, out dealingQueue, collectionToShuffle);
 
-            while (!dealingList.IsEmpty())
-                HandleMongeanStep(returnList, dealingList);
+            while (!dealingQueue.IsEmpty())
+                MongeanStep(returnList, dealingQueue);
 
             return returnList;
         }
 
-        private static void SetupMongeanShuffle<T>(out LinkedList<T> theReturnList, out Queue<T> queueToDealFrom, ICollection<T> listToDealFrom)
+        private static void SetupMongeanShuffle<T>(out LinkedList<T> targetList, out Queue<T> sourceQueue, ICollection<T> sourceList)
         {
-            theReturnList = new LinkedList<T>();
-            queueToDealFrom = new Queue<T>(listToDealFrom);
-            theReturnList.AddFirst(queueToDealFrom.Dequeue());
+            targetList = new LinkedList<T>();
+            sourceQueue = new Queue<T>(sourceList);
+            targetList.AddFirst(sourceQueue.Dequeue());
         }
 
-        private static void HandleMongeanStep<T>(LinkedList<T> targetList, Queue<T> dealingList)
+        private static void MongeanStep<T>(LinkedList<T> targetList, Queue<T> sourceList)
         {
             if (!targetList.CountIsEven())
-                targetList.AddFirst(dealingList.Dequeue());
+                targetList.AddFirst(sourceList.Dequeue());
             else
-                targetList.AddLast(dealingList.Dequeue());
+                targetList.AddLast(sourceList.Dequeue());
         }
         #endregion
 

@@ -63,7 +63,7 @@ namespace Kesyhara.HumanShuffling.UnitTests
         [TestMethod]
         public void MongeanShuffleDoesNotReturnNull()
         {
-            ICollection<int> shuffledList = MyUtils.GenerateListOfIntegers(5).MongeanShuffle<int>();
+            ICollection<int> shuffledList = MyUtils.GenerateListOfIntegers(5).ApplyMongeanShuffle<int>();
 
             Assert.IsNotNull(shuffledList);
         }
@@ -72,7 +72,7 @@ namespace Kesyhara.HumanShuffling.UnitTests
         [TestMethod]
         public void MongeanShuffleMaintainsCount()
         {
-            ICollection<int> shuffledList = MyUtils.GenerateListOfIntegers(5).MongeanShuffle<int>();
+            ICollection<int> shuffledList = MyUtils.GenerateListOfIntegers(5).ApplyMongeanShuffle<int>();
 
             Assert.AreEqual(shuffledList.Count, MyUtils.GenerateListOfIntegers(5).Count);
         }
@@ -81,7 +81,7 @@ namespace Kesyhara.HumanShuffling.UnitTests
         [TestMethod]
         public void MongeanShuffleReordersSequence()
         {
-            ICollection<int> shuffledList = MyUtils.GenerateListOfIntegers(5).MongeanShuffle<int>();
+            ICollection<int> shuffledList = MyUtils.GenerateListOfIntegers(5).ApplyMongeanShuffle<int>();
 
             Assert.IsTrue(!shuffledList.SequenceEqual(MyUtils.GenerateListOfIntegers(5)));
         }
@@ -90,7 +90,7 @@ namespace Kesyhara.HumanShuffling.UnitTests
         [TestMethod]
         public void MongeanShuffleGeneratesCorrectSequenceOnOneIteration()
         {
-            ICollection<int> shuffledList = MyUtils.GenerateListOfIntegers(5).MongeanShuffle<int>();
+            ICollection<int> shuffledList = MyUtils.GenerateListOfIntegers(5).ApplyMongeanShuffle<int>();
 
             List<int> correctListOrder = new List<int> { 4, 2, 1, 3, 5 };
 
@@ -101,7 +101,7 @@ namespace Kesyhara.HumanShuffling.UnitTests
         [TestMethod]
         public void MongeanShuffleGeneratesCorrectSequenceOnTwoIterations()
         {
-            ICollection<int> shuffledList = MyUtils.GenerateListOfIntegers(5).MongeanShuffle<int>(2);
+            ICollection<int> shuffledList = MyUtils.GenerateListOfIntegers(5).ApplyMongeanShuffle<int>(2);
 
             List<int> correctListOrder = new List<int> { 3, 2, 4, 1, 5 };
 
