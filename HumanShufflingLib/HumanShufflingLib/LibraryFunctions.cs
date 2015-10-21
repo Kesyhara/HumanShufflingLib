@@ -119,12 +119,18 @@ namespace Kesyhara.HumanShuffling.LibraryFunctions
         #endregion
 
         #region Overhand
-        public static ICollection<T> OverhandShuffle<T>(this ICollection<T> collectionToShuffle, int iterationCount = 1)
+        public static ICollection<T> ApplyOverhandShuffle<T>(this ICollection<T> collectionToShuffle, int iterationCount = 1)
         {
-            double halfDeckSize = collectionToShuffle.Count / 2;
+            ICollection<T> shuffledCollection = new List<T>(collectionToShuffle);
 
+            for (int iterationsLeft = iterationCount; iterationsLeft > 0; iterationsLeft--)
+                shuffledCollection = OverhandShuffle(shuffledCollection);
 
+            return new List<T>(collectionToShuffle);
+        }
 
+        private static ICollection<T> OverhandShuffle<T> (ICollection<T> collectionToShuffle)
+        {
             return new List<T>(collectionToShuffle);
         }
         #endregion
