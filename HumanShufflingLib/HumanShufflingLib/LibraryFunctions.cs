@@ -91,7 +91,9 @@ namespace Kesyhara.HumanShuffling.LibraryFunctions
 
             SetupRiffleShuffle(out topHalf, out botHalf, collectionToShuffle);
 
-            CallRiffleFunctionsInOrder(topHalf, botHalf, targetList);
+            RiffleLoop(topHalf, botHalf, targetList);
+
+            RiffleFinalize(topHalf, botHalf, targetList);
 
             return targetList;
         }
@@ -104,13 +106,6 @@ namespace Kesyhara.HumanShuffling.LibraryFunctions
 
             topHalf = new Stack<T>(firstList);
             botHalf = new Stack<T>(secondList);
-        }
-
-        private static void CallRiffleFunctionsInOrder<T>(Stack<T> topHalf, Stack<T> botHalf, ICollection<T> targetList)
-        {
-            RiffleLoop(topHalf, botHalf, targetList);
-
-            RiffleFinalize(topHalf, botHalf, targetList);
         }
 
         private static void RiffleLoop<T>(Stack<T> topHalf, Stack<T> botHalf, ICollection<T> targetList)
@@ -131,22 +126,15 @@ namespace Kesyhara.HumanShuffling.LibraryFunctions
 
         private static void RiffleFinalize<T>(Stack<T> topHalf, Stack<T> botHalf, ICollection<T> targetList)
         {
-            Stack<T> stackToEmpty = DetermineEmptyStack(topHalf, botHalf);
+            Stack<T> stackToEmpty = GetNonEmptyStack(topHalf, botHalf);
 
             while (!stackToEmpty.IsEmpty())
                 targetList.Add(stackToEmpty.Pop());
         }
 
-        private static Stack<T> DetermineEmptyStack<T>(Stack<T> firstStack, Stack<T> secondStack)
+        private static Stack<T> GetNonEmptyStack<T>(Stack<T> firstStack, Stack<T> secondStack)
         {
-            Stack<T> returnValue;
-
-            if (firstStack.IsEmpty())
-                returnValue = secondStack;
-            else
-                returnValue = firstStack;
-
-            return returnValue;
+            return !(firstStack.IsEmpty()) ? firstStack : secondStack;
         }
         #endregion
 
