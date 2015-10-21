@@ -114,7 +114,7 @@ namespace Kesyhara.HumanShuffling.UnitTests
         [TestMethod]
         public void RiffleShuffleDoesNotReturnNull()
         {
-            ICollection<int> testList = MyUtils.GenerateListOfIntegers(5).RiffleShuffle<int>();
+            ICollection<int> testList = MyUtils.GenerateListOfIntegers(5).ApplyRiffleShuffle<int>();
 
             Assert.IsNotNull(testList);
         }
@@ -123,7 +123,7 @@ namespace Kesyhara.HumanShuffling.UnitTests
         [TestMethod]
         public void RiffleShuffleMaintainsCount()
         {
-            ICollection<int> testList = MyUtils.GenerateListOfIntegers(5).RiffleShuffle<int>();
+            ICollection<int> testList = MyUtils.GenerateListOfIntegers(5).ApplyRiffleShuffle<int>();
 
             Assert.AreEqual(testList.Count, MyUtils.GenerateListOfIntegers(5).Count);
         }
@@ -132,7 +132,7 @@ namespace Kesyhara.HumanShuffling.UnitTests
         [TestMethod]
         public void RiffleShuffleReordersSequence()
         {
-            ICollection<int> testList = MyUtils.GenerateListOfIntegers(5).RiffleShuffle<int>();
+            ICollection<int> testList = MyUtils.GenerateListOfIntegers(5).ApplyRiffleShuffle<int>();
 
             Assert.IsTrue(!testList.SequenceEqual(MyUtils.GenerateListOfIntegers(5)));
         }
