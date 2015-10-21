@@ -77,15 +77,15 @@ namespace Kesyhara.HumanShuffling.LibraryFunctions
         #region Riffle
         public static ICollection<T> RiffleShuffle<T>(this ICollection<T> collectionToShuffle, int iterationCount = 1)
         {
-            ICollection<T> firstList, secondList, targetList, listToShuffle;
+            ICollection<T> targetList, listToShuffle;
+            
             listToShuffle = HandleMultipleIterations<T>(HumanShuffling_LibraryFunctions.RiffleShuffle, collectionToShuffle, iterationCount);
+
+            Stack<T> topHalf, botHalf;
 
             targetList = new List<T>(listToShuffle.Count);
 
-            MyUtils.SplitCollectionInHalf<T>(listToShuffle, out firstList, out secondList);
-
-            Stack<T> topHalf = new Stack<T>(firstList);
-            Stack<T> botHalf = new Stack<T>(secondList);
+            SetupRiffleShuffle(out topHalf, out botHalf, listToShuffle);
 
             while (!topHalf.IsEmpty() && !botHalf.IsEmpty())
                 HandleRiffleStep(topHalf, botHalf, targetList);
@@ -93,6 +93,16 @@ namespace Kesyhara.HumanShuffling.LibraryFunctions
             HandleRiffleFinalize(topHalf, botHalf, targetList);
 
             return targetList;
+        }
+
+        private static void SetupRiffleShuffle<T>(out Stack<T> topHalf, out Stack<T> botHalf, ICollection<T> sourceCollection)
+        {
+            ICollection<T> firstList, secondList;
+
+            MyUtils.SplitCollectionInHalf<T>(sourceCollection, out firstList, out secondList);
+
+            topHalf = new Stack<T>(firstList);
+            botHalf = new Stack<T>(secondList);
         }
 
         private static void HandleRiffleStep<T>(Stack<T> topHalf, Stack<T> botHalf, ICollection<T> targetList)
