@@ -28,6 +28,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Kesyhara.HumanShuffling.LibraryFunctions;
 using Kesyhara.HumanShuffling.UtilityFunctions;
+
 using MyUtils = Kesyhara.HumanShuffling.UtilityFunctions.Utils;
 
 namespace Kesyhara.HumanShuffling.UnitTests
